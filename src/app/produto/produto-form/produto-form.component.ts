@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Produto } from 'src/app/models/produto';
+import { ProdutoService } from 'src/app/services/produto.service';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-produto-form',
@@ -9,12 +13,33 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class ProdutoFormComponent implements OnInit {
 
   produtoForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    public activeModal: NgbActiveModal,
+    private produtoService : ProdutoService
+    ) { }
 
   ngOnInit() {
-    this.produtoForm = this.formBuilder.group{{
-      
-    }}
+    this.produtoForm = this.formBuilder.group({
+      codigoProduto: ['', Validators.required],
+      categoria: ['', Validators.required],
+      descricao: ['', Validators.required],
+    })
   }
+
+  salvarProduto() {
+    if(this.produtoForm.invalid) {
+      return;
+    }
+    
+    let produto : Produto = this.produtoForm.value;
+    this.produtoService.salvarProdutos(produto).then(response => this.handleSuccessSave(response, produto))
+    .catch(err => console.error(err));
+  }
+
+  handleSuccessSave(response: DocumentReference, produto: Produto) {
+    this.activeModal.dismiss({produto: produto, id: response.id, CreateMode: true})
+  }
+
 
 }

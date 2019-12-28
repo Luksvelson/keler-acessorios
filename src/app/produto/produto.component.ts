@@ -25,5 +25,6 @@ export class ProdutoComponent implements OnInit {
   handleModalProdutoForm(response) {
     alert('Janela Fechada');
   }
+    
 
 }
