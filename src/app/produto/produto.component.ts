@@ -22,39 +22,50 @@ export class ProdutoComponent implements OnInit {
   
   addProduto() {
     const modal = this.modalService.open(ProdutoFormComponent);
+    modal.componentInstance.contexto = "Adicionar Produto";
+    modal.result.then(
+      this.handleModalProdutoForm.bind(this),
+      this.handleModalProdutoForm.bind(this)
+      );
+  }
+    
+  handleModalProdutoForm(response) {
+    this.mostrarProdutos();
+  }
+    
+  produtos : Produto[] = [];
+    
+  mostrarProdutos() {
+    this.produtoService.getProdutos().subscribe(response => {
+    this.produtos = [];
+    response.docs.forEach(value => {
+      const data = value.data();
+      const produto : Produto = {
+        id : value.id,
+        codigoProduto: data.codigoProduto,
+        categoria: data.categoria,
+        descricao: data.descricao
+      };
+      this.produtos.push(produto);
+    });
+  });
+  }
+
+  editarProduto(index : number) {
+    const modal = this.modalService.open(ProdutoFormComponent);
+    modal.componentInstance.contexto = "Editar Produto";
+    modal.componentInstance.produtoSelecionado = this.produtos[index];
+    console.log(this.produtos[index]);
     modal.result.then(
       this.handleModalProdutoForm.bind(this),
       this.handleModalProdutoForm.bind(this)
       )
-    }
-    
-    handleModalProdutoForm(response) {
-      
-    }
-    
-    produtos : Produto[] = [];
-    
-    mostrarProdutos() {
-      this.produtoService.getProdutos().subscribe(response => {
-      this.produtos = [];
-      response.docs.forEach(value => {
-        const data = value.data();
-        const produto : Produto = {
-          codigoProduto: data.codigoProduto,
-          categoria: data.categoria,
-          descricao: data.descricao
-        };
-        this.produtos.push(produto);
-      });
-    });
   }
 
-  // editarProduto() {
-  //   this.produtoService.editarProdutos()
-  // }
+  deletarProduto(index : number) {
 
-  // deletarProduto() {
-
-  // }
+    this.produtoService.excluirProdutos(this.produtos[index]).then(() => { this.produtos.splice(index, 1); })
+    .catch(err => console.error(err));
+  }
 
 }

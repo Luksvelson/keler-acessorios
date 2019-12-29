@@ -27,7 +27,18 @@ export class ProdutoFormComponent implements OnInit {
     })
   }
 
+  contexto : string;
+  produtoSelecionado : Produto;
+
   salvarProduto() {
+    if (this.contexto == "Adicionar Produto") {
+      this.adicionarProduto();
+    } else {
+      this.alterarProduto();
+    }
+  }
+
+  adicionarProduto() {
     if(this.produtoForm.invalid) {
       return;
     }
@@ -37,8 +48,24 @@ export class ProdutoFormComponent implements OnInit {
     .catch(err => console.error(err));
   }
 
+  alterarProduto() {
+    if(this.produtoForm.invalid) {
+      return;
+    }
+    
+    let produto : Produto = this.produtoForm.value;
+    produto.id = this.produtoSelecionado.id;
+    this.produtoService.editarProdutos(produto).then(response => this.handleSuccessEdit(produto))
+    .catch(err => console.error(err));
+  }
+
   handleSuccessSave(response: DocumentReference, produto: Produto) {
     this.activeModal.dismiss({produto: produto, id: response.id, CreateMode: true})
+    
+  }
+
+  handleSuccessEdit(produto: Produto) {
+    this.activeModal.dismiss({produto: produto, id: produto.id, CreateMode: true})
   }
 
 

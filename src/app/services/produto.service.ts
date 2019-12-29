@@ -21,11 +21,11 @@ export class ProdutoService {
   }
 
   editarProdutos(produto: Produto): Promise<void> {
-    return this.banco.collection(this.produtoCollection).doc(produto.codigoProduto.toString()).update(produto)
+    return this.banco.collection(this.produtoCollection).doc(produto.id).set(produto)
   }
 
-  excluirProdutos(codigoProduto : number): Promise<void> {
-    return this.banco.collection(this.produtoCollection).doc(codigoProduto.toString()).delete();
+  excluirProdutos(produto: Produto): Promise<void> {
+    return this.banco.collection(this.produtoCollection).doc(produto.id).delete();
   }
 
 }
