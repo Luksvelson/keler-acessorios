@@ -11,13 +11,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule} from '@angular/forms';
 import { ProdutoComponent } from './produto/produto.component';
 import { ProdutoFormComponent } from './produto/produto-form/produto-form.component';
+import { MenuComponent } from './menu/menu.component';
+import { VendaComponent } from './venda/venda.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ProdutoComponent,
-    ProdutoFormComponent
+    ProdutoFormComponent,
+    MenuComponent,
+    VendaComponent
   ],
   imports: [
     BrowserModule,

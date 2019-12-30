@@ -1,16 +1,19 @@
 <main role="main" class="container">
-    <div class="starter-template">
-        <h1>Keler Acessorios - Produtos</h1>
-        <p class="lead">Preencha os campos abaixo para incluir um produto e finalize clicando no botão "Adicionar Produto".</p>
-        <button class="btn btn-success" (click)="addProduto()">Adicionar Produto</button>
+    <div class="row col-md-12">
+        <h2 class="col-md-8">Keler Acessórios - Cadastro de Produtos</h2>
+        <div class="center-align">
+            <button class="btn btn-success" (click)="addProduto()">Adicionar Produto</button>
+        </div>
     </div>
-
+    <br>
     <table class="table table-striped" *ngIf="produtos && produtos.length > 0">
         <thead>
             <tr>
                 <th>Código do Produto</th>
                 <th>Categoria</th>
                 <th>Descrição</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
