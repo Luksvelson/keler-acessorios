@@ -24,6 +24,7 @@ export class ProdutoFormComponent implements OnInit {
       codigoProduto: ['', Validators.required],
       categoria: ['', Validators.required],
       descricao: ['', Validators.required],
+      preco: ['', Validators.required]
     })
   }
 
@@ -44,7 +45,7 @@ export class ProdutoFormComponent implements OnInit {
     }
     
     let produto : Produto = this.produtoForm.value;
-    this.produtoService.salvarProdutos(produto).then(response => this.handleSuccessSave(response, produto))
+    this.produtoService.salvarProduto(produto).then(response => this.handleSuccessSave(response, produto))
     .catch(err => console.error(err));
   }
 
@@ -55,7 +56,7 @@ export class ProdutoFormComponent implements OnInit {
     
     let produto : Produto = this.produtoForm.value;
     produto.id = this.produtoSelecionado.id;
-    this.produtoService.editarProdutos(produto).then(response => this.handleSuccessEdit(produto))
+    this.produtoService.editarProduto(produto).then(response => this.handleSuccessEdit(produto))
     .catch(err => console.error(err));
   }
 

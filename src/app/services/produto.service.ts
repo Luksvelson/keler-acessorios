@@ -16,11 +16,11 @@ export class ProdutoService {
     return this.banco.collection<Produto>(this.produtoCollection, ref=> ref.orderBy('codigoProduto', 'asc')).get();
   }
 
-  salvarProdutos(produto: Produto): Promise<DocumentReference> {
+  salvarProduto(produto: Produto): Promise<DocumentReference> {
     return this.banco.collection(this.produtoCollection).add(produto)
   }
 
-  editarProdutos(produto: Produto): Promise<void> {
+  editarProduto(produto: Produto): Promise<void> {
     return this.banco.collection(this.produtoCollection).doc(produto.id).set(produto)
   }
 

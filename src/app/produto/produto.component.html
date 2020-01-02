@@ -12,7 +12,7 @@
                 <th>Código do Produto</th>
                 <th>Categoria</th>
                 <th>Descrição</th>
-                <th></th>
+                <th>Preço</th>
                 <th></th>
             </tr>
         </thead>
@@ -21,6 +21,7 @@
                 <td>{{produto.codigoProduto}}</td>
                 <td>{{produto.categoria}}</td>
                 <td>{{produto.descricao}}</td>
+                <td>{{produto.preco}}</td>
                 <td><button class="btn btn-primary" (click)="editarProduto(index)">Editar</button></td>
                 <td><button class="btn btn-danger" (click)="deletarProduto(index)">Deletar</button></td>
             </tr>

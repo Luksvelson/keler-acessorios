@@ -13,6 +13,8 @@ import { ProdutoComponent } from './produto/produto.component';
 import { ProdutoFormComponent } from './produto/produto-form/produto-form.component';
 import { MenuComponent } from './menu/menu.component';
 import { VendaComponent } from './venda/venda.component';
+import { VendaFormComponent } from './venda/venda-form/venda-form.component';
+import { ListaProdutosComponent } from './produto/lista-produtos/lista-produtos.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { VendaComponent } from './venda/venda.component';
     ProdutoComponent,
     ProdutoFormComponent,
     MenuComponent,
-    VendaComponent
+    VendaComponent,
+    VendaFormComponent,
+    ListaProdutosComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,9 @@ import { VendaComponent } from './venda/venda.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ProdutoFormComponent]
+  entryComponents: [
+    ProdutoFormComponent,
+    VendaFormComponent
+  ]
 })
 export class AppModule { }

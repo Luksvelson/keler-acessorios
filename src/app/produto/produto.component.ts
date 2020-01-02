@@ -44,7 +44,8 @@ export class ProdutoComponent implements OnInit {
         id : value.id,
         codigoProduto: data.codigoProduto,
         categoria: data.categoria,
-        descricao: data.descricao
+        descricao: data.descricao,
+        preco: data.preco
       };
       this.produtos.push(produto);
     });

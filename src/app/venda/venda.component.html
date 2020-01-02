@@ -1,1 +1,31 @@
-<p>venda works!</p>
+<main role="main" class="container">
+    <div class="row col-md-12">
+        <h2 class="col-md-8">Keler Acessórios - Cadastro de Vendas</h2>
+        <div class="center-align">
+            <button class="btn btn-success" (click)="addVenda()">Adicionar Venda</button>
+        </div>
+    </div>
+    <br>
+    <table class="table table-striped" *ngIf="vendas && vendas.length > 0">
+        <thead>
+            <tr>
+                <th>Código da Venda</th>
+                <th>Pedidos</th>
+                <th>Data de Venda</th>
+                <th>Data de Entrega</th>
+                <th>Preço Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let produto of produtos, let index = index">
+                <td>{{venda.codigoVenda}}</td>
+                <td></td>
+                <td>{{venda.dataVenda}}</td>
+                <td>{{venda.dataEntrega}}</td>
+                <td><button class="btn btn-primary" (click)="editarVenda(index)">Editar</button></td>
+                <td><button class="btn btn-danger" (click)="deletarVenda(index)">Deletar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</main><!-- /.container -->
+

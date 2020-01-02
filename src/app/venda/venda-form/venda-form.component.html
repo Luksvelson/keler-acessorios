@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{ contexto }}</h5>
+    <button type="button" class="close" (click)="activeModal.close('Close Click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="vendaForm" (ngSubmit)="salvarVenda()">
+        <div class="form-group">
+            <label for="codigoProduto">Código da Venda</label>
+            <input type="number" class="form-control" id="codigoVenda" formControlName="codigoVenda" >
+        </div>
+        <lista-produtos></lista-produtos>
+        <div class="form-group">
+            <label for="dataVenda">Data de Venda</label>
+            <input type="date" class="form-control" id="dataVenda" formControlName="dataVenda">
+        </div>
+        <div class="form-group">
+            <label for="dataEntrega">Data de Entrega</label>
+            <input type="date" class="form-control" id="dataEntrega" formControlName="dataEntrega" >
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close Click')">Cancelar</button>
+    <button type="button" [disabled]="vendaForm.invalid" class="btn btn-primary" (click)="salvarVenda()">Enviar</button>
+</div>
