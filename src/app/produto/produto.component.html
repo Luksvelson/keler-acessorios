@@ -1,0 +1,29 @@
+<main role="main" class="container">
+    <div class="row col-md-12">
+        <h2 class="col-md-8">Keler Acessórios - Cadastro de Produtos</h2>
+        <div class="center-align">
+            <button class="btn btn-success" (click)="addProduto()">Adicionar Produto</button>
+        </div>
+    </div>
+    <br>
+    <table class="table table-striped" *ngIf="produtos && produtos.length > 0">
+        <thead>
+            <tr>
+                <th>Código do Produto</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let produto of produtos, let index = index">
+                <td>{{produto.codigoProduto}}</td>
+                <td>{{produto.categoria}}</td>
+                <td>{{produto.descricao}}</td>
+                <td><button class="btn btn-primary" (click)="editarProduto(index)">Editar</button></td>
+                <td><button class="btn btn-danger" (click)="deletarProduto(index)">Deletar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</main><!-- /.container -->

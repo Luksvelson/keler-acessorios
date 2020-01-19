@@ -1,0 +1,9 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "None",
+    "appService.deploySubpath": "dist\\keler-acessorios",
+    "appService.showBuildDuringDeployPrompt": false
+}
