@@ -17,17 +17,16 @@ export class ListaProdutosComponent implements OnInit {
 
   ngOnInit() {
     this.listaProdutosForm = this.formBuilder.group({
-      produto: ['', Validators.required],
-      quantidade: ['', Validators.required],
       pedidos: this.formBuilder.array([ this.criarProduto() ])
     })
     this.mostrarProdutos();
   }
-
+  
   listaProdutosForm : FormGroup;
   produtosExistentes : Produto[] = [];
-  produtosSelecionados: Produto[] = [];
   pedidos : FormArray;
+  produtosSelecionados: Produto[] = [];
+  listaPronta: [string, number, number, number][] = [];
 
   mostrarProdutos() {
     this.produtoService.getProdutos().subscribe(response => {
@@ -44,43 +43,55 @@ export class ListaProdutosComponent implements OnInit {
       this.produtosExistentes.push(produto);
     });
   });
-  }
+}
 
-  criarProduto(): FormGroup {
-    return this.formBuilder.group({
-      produto: '',
-      precoTotal: '',
+criarProduto(): FormGroup {
+      return this.formBuilder.group({
+      produtos: this.produtosExistentes,
+      precoUnitario: '',
       quantidade: 0,
+      precoTotal: 0.0
     })
   }
 
   selecionarProduto(produtoSelecionado: string) {
     console.log(this.produtosExistentes);
-      for(let i = 0; i <= this.produtosExistentes.length; i++) {
+      for(let i = 0; i < this.produtosExistentes.length; i++) {
         if (this.produtosExistentes[i].descricao === produtoSelecionado) {
           this.produtosSelecionados.push(this.produtosExistentes[i]);
         }
       }
+      console.log(this.produtosSelecionados)
       return this.produtosSelecionados;
   }
-
-  definirPreco() {
+  
+  
+  definirPreco(quantidade: number) {
     if (this.produtosSelecionados && this.produtosSelecionados.length) {
-      return this.produtosSelecionados[this.produtosSelecionados.length].preco;
-    } else {
-      return 0;
+      for(let i = 0; i < this.produtosSelecionados.length; i++) {
+        this.listaPronta.push([this.produtosSelecionados[i].descricao, this.produtosSelecionados[i].preco,
+          quantidade, this.produtosSelecionados[i].preco * quantidade]);
+        }
+        
+        console.log(this.listaPronta);
+      } 
     }
-  }
+    
+    adicionarProduto() : void {
+      this.pedidos = this.listaProdutosForm.get('pedidos') as FormArray;
+      this.pedidos.push(this.criarProduto());
 
-  adicionarProduto() : void {
-    this.pedidos = this.listaProdutosForm.get('pedidos') as FormArray;
-    this.pedidos.push(this.criarProduto());
-  }
+    }
+    
+    @Output()listaProdutos = new EventEmitter;
+    
+    
+    emitirProduto() {
+    // ,
 
-  @Output()listaProdutos = new EventEmitter;
-
-
-  emitirProduto() {
+    // for(let i = 0; i < this.produtosSelecionados.length; i++) {
+    //   listaPronta.push(this.produtosSelecionados[i].descricao, this.produtosSelecionados[i].preco, )
+    // }
 
   }
 
