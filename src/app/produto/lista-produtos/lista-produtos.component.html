@@ -4,27 +4,12 @@
             <div class="form-group">
                 <div formArrayName="pedidos" *ngFor="let pedido of listaProdutosForm.get('pedidos').controls; let i = index">
                     <div [formGroupName]="i">
-                        <label for="produtos">Produto</label>
-                        <select name="produtos" id="produtos" class="form-control" (change)="selecionarProduto($event.target.value)">
-                            <option disabled value="">Selecione um Produto</option>
-                            <option *ngFor="let produto of produtosExistentes; let index = index" [value]="produtosExistentes[index].descricao">{{ produtosExistentes[index].descricao }}</option>
-                        </select>
-                        <div *ngIf="produtosSelecionados.length > 0">
-                            <label for="precoUnitario">Preço Unitário</label>
-                            <input type="number" disabled class="form-control" id="precoUnitario" [value]="this.produtosSelecionados[this.produtosSelecionados.length - 1].preco" formControlName="precoUnitario">
-                        </div>
-                        <label for="quantidade">Quantidade</label>
-                        <input type="number" class="form-control" id="quantidade" (change)="definirPreco($event.target.value)" formControlName="quantidade">
-                        <div *ngIf="produtosSelecionados.length > 0">
-                            <label for="precoTotal">Preço Total</label>
-                            <input type="number" disabled class="form-control" id="precoTotal" value="precoUnitario * quantidade" formControlName="precoTotal">
-                        </div>
+                        <card-produto (produto)="gerarLista($event)"></card-produto>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-success">Salvar Produto(s)</button>
+            <button type="button" class="btn btn-success" (click)="emitirListaProdutos()">Salvar Produto(s)</button>
             <button type="button" class="btn btn-primary" (click)="adicionarProduto()">Adicionar Produto</button>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { Venda } from 'src/app/models/venda';
 import { VendaService } from 'src/app/services/venda.service';
 import { Produto } from 'src/app/models/produto';
 import { ProdutoService } from 'src/app/services/produto.service';
+import { VendaComponent } from '../venda.component';
 
 @Component({
   selector: 'venda-form',
@@ -31,35 +32,11 @@ export class VendaFormComponent implements OnInit {
       codigoVenda: ['', Validators.required],
       dataVenda: ['', Validators.required],
       dataEntrega: ['', Validators.required]
-    })
-    this.mostrarProdutos()
+    });
   }
 
   contexto : string;
-  vendaSelecionado : Venda;
-
-  produtos : Produto[] = [];
-
-  mostrarProdutos() {
-    this.produtoService.getProdutos().subscribe(response => {
-    this.produtos = [];
-    response.docs.forEach(value => {
-      const data = value.data();
-      const produto : Produto = {
-        id : value.id,
-        codigoProduto: data.codigoProduto,
-        categoria: data.categoria,
-        descricao: data.descricao,
-        preco: data.preco
-      };
-      this.produtos.push(produto);
-    });
-  });
-  }
-
-  
-
-  
+  venda : Venda;
 
   salvarVenda() {
     if (this.contexto == "Adicionar Venda") {
@@ -69,13 +46,20 @@ export class VendaFormComponent implements OnInit {
     }
   }
 
+  adicionarPedidos(pedidos : any) {
+    for (let i = 0; i < pedidos.length; i++) {
+      this.venda.pedidos.push(pedidos[i]);
+    }
+    console.log(this.venda.pedidos);
+  }
+
   adicionarVenda() {
     if(this.vendaForm.invalid) {
       return;
     }
     
-    let venda : Venda = this.vendaForm.value;
-    this.vendaService.salvarVenda(venda).then(response => this.handleSuccessSave(response, venda))
+    this.venda = this.vendaForm.value;
+    this.vendaService.salvarVenda(this.venda).then(response => this.handleSuccessSave(response, this.venda))
     .catch(err => console.error(err));
   }
 

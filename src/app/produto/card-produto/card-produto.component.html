@@ -1,0 +1,16 @@
+<label for="produtos">Produto</label>
+<select id="produtos" class="form-control" (change)="selecionarProduto($event.target.value)">
+    <option disabled value="">Selecione um Produto</option>
+    <option *ngFor="let produto of produtosExistentes; let index = index" [value]="produtosExistentes[index].descricao">
+        {{ produtosExistentes[index].descricao }}</option>
+</select>
+<div *ngIf="produtoSelecionado.descricao">
+    <label for="precoUnitario">Preço Unitário</label>
+    <input type="number" disabled class="form-control" id="precoUnitario" [value]="produtoSelecionado.precoUnitario" formControlName="precoUnitario">
+</div>
+<label for="quantidade">Quantidade</label>
+<input type="number" class="form-control" id="quantidade" (change)="definirPreco($event.target.value)" [value]="produtoSelecionado.quantidade" formControlName="quantidade">
+<div *ngIf="produtoSelecionado">
+    <label for="precoTotal">Preço Total</label>
+    <input type="number" disabled class="form-control" id="precoTotal" [value]="produtoSelecionado.precoTotal" formControlName="precoTotal">
+</div>

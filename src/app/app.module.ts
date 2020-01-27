@@ -15,6 +15,7 @@ import { MenuComponent } from './menu/menu.component';
 import { VendaComponent } from './venda/venda.component';
 import { VendaFormComponent } from './venda/venda-form/venda-form.component';
 import { ListaProdutosComponent } from './produto/lista-produtos/lista-produtos.component';
+import { CardProdutoComponent } from './produto/card-produto/card-produto.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ListaProdutosComponent } from './produto/lista-produtos/lista-produtos.
     VendaComponent,
     VendaFormComponent,
     ListaProdutosComponent,
+    CardProdutoComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@
             <label for="codigoProduto">Código da Venda</label>
             <input type="number" class="form-control" id="codigoVenda" formControlName="codigoVenda" >
         </div>
-        <lista-produtos></lista-produtos>
+        <lista-produtos (listaProdutos)="adicionarPedidos($event)"></lista-produtos>
         <div class="form-group">
             <label for="dataVenda">Data de Venda</label>
             <input type="date" class="form-control" id="dataVenda" formControlName="dataVenda">

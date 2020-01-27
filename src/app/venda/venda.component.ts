@@ -44,8 +44,7 @@ export class VendaComponent implements OnInit {
         codigoVenda: data.codigoVenda,
         pedidos: data.pedido,
         dataVenda: data.dataVenda,
-        dataEntrega: data.dataEntrega,
-        precoTotal: data.precoTotal
+        dataEntrega: data.dataEntrega
       };
       this.vendas.push(venda);
     });
