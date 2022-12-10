@@ -11,61 +11,61 @@ import { Produto } from '../models/produto';
 })
 export class ProdutoComponent implements OnInit {
 
-  constructor(
-    private modalService: NgbModal,
-    private produtoService: ProdutoService,
-  ) { }
+  // constructor(
+  //   private modalService: NgbModal,
+  //   private produtoService: ProdutoService,
+  // ) { }
 
-  ngOnInit() {
-    this.mostrarProdutos();
-  }
+  // ngOnInit() {
+  //   this.mostrarProdutos();
+  // }
   
-  addProduto() {
-    const modal = this.modalService.open(ProdutoFormComponent);
-    modal.componentInstance.contexto = "Adicionar Produto";
-    modal.result.then(
-      this.handleModalProdutoForm.bind(this),
-      this.handleModalProdutoForm.bind(this)
-      );
-  }
+  // addProduto() {
+  //   const modal = this.modalService.open(ProdutoFormComponent);
+  //   modal.componentInstance.contexto = "Adicionar Produto";
+  //   modal.result.then(
+  //     this.handleModalProdutoForm.bind(this),
+  //     this.handleModalProdutoForm.bind(this)
+  //     );
+  // }
     
-  handleModalProdutoForm(response) {
-    this.mostrarProdutos();
-  }
+  // handleModalProdutoForm(response) {
+  //   this.mostrarProdutos();
+  // }
     
-  produtos : Produto[] = [];
+  // produtos : Produto[] = [];
     
-  mostrarProdutos() {
-    this.produtoService.getProdutos().subscribe(response => {
-    this.produtos = [];
-    response.docs.forEach(value => {
-      const data = value.data();
-      const produto : Produto = {
-        id : value.id,
-        codigoProduto: data.codigoProduto,
-        categoria: data.categoria,
-        descricao: data.descricao
-      };
-      this.produtos.push(produto);
-    });
-  });
-  }
+  // mostrarProdutos() {
+  //   this.produtoService.getProdutos().subscribe(response => {
+  //   this.produtos = [];
+  //   response.docs.forEach(value => {
+  //     const data = value.data();
+  //     const produto : Produto = {
+  //       id : value.id,
+  //       codigoProduto: data.codigoProduto,
+  //       categoria: data.categoria,
+  //       descricao: data.descricao
+  //     };
+  //     this.produtos.push(produto);
+  //   });
+  // });
+  // }
 
-  editarProduto(index : number) {
-    const modal = this.modalService.open(ProdutoFormComponent);
-    modal.componentInstance.contexto = "Editar Produto";
-    modal.componentInstance.produtoSelecionado = this.produtos[index];
-    console.log(this.produtos[index]);
-    modal.result.then(
-      this.handleModalProdutoForm.bind(this),
-      this.handleModalProdutoForm.bind(this)
-      )
-  }
+  // editarProduto(index : number) {
+  //   const modal = this.modalService.open(ProdutoFormComponent);
+  //   modal.componentInstance.contexto = "Editar Produto";
+  //   modal.componentInstance.produtoSelecionado = this.produtos[index];
+  //   console.log(this.produtos[index]);
+  //   modal.result.then(
+  //     this.handleModalProdutoForm.bind(this),
+  //     this.handleModalProdutoForm.bind(this)
+  //     )
+  // }
 
-  deletarProduto(index : number) {
+  // deletarProduto(index : number) {
 
-    this.produtoService.excluirProdutos(this.produtos[index]).then(() => { this.produtos.splice(index, 1); })
-    .catch(err => console.error(err));
-  }
+  //   this.produtoService.excluirProdutos(this.produtos[index]).then(() => { this.produtos.splice(index, 1); })
+  //   .catch(err => console.error(err));
+  // }
 
 }

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Produto } from 'src/app/models/produto';
 import { ProdutoService } from 'src/app/services/produto.service';
-import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-produto-form',
@@ -30,43 +29,43 @@ export class ProdutoFormComponent implements OnInit {
   contexto : string;
   produtoSelecionado : Produto;
 
-  salvarProduto() {
-    if (this.contexto == "Adicionar Produto") {
-      this.adicionarProduto();
-    } else {
-      this.alterarProduto();
-    }
-  }
+  // salvarProduto() {
+  //   if (this.contexto == "Adicionar Produto") {
+  //     this.adicionarProduto();
+  //   } else {
+  //     this.alterarProduto();
+  //   }
+  // }
 
-  adicionarProduto() {
-    if(this.produtoForm.invalid) {
-      return;
-    }
+  // adicionarProduto() {
+  //   if(this.produtoForm.invalid) {
+  //     return;
+  //   }
     
-    let produto : Produto = this.produtoForm.value;
-    this.produtoService.salvarProdutos(produto).then(response => this.handleSuccessSave(response, produto))
-    .catch(err => console.error(err));
-  }
+  //   let produto : Produto = this.produtoForm.value;
+  //   this.produtoService.salvarProdutos(produto).then(response => this.handleSuccessSave(response, produto))
+  //   .catch(err => console.error(err));
+  // }
 
-  alterarProduto() {
-    if(this.produtoForm.invalid) {
-      return;
-    }
+  // alterarProduto() {
+  //   if(this.produtoForm.invalid) {
+  //     return;
+  //   }
     
-    let produto : Produto = this.produtoForm.value;
-    produto.id = this.produtoSelecionado.id;
-    this.produtoService.editarProdutos(produto).then(response => this.handleSuccessEdit(produto))
-    .catch(err => console.error(err));
-  }
+  //   let produto : Produto = this.produtoForm.value;
+  //   produto.id = this.produtoSelecionado.id;
+  //   this.produtoService.editarProdutos(produto).then(response => this.handleSuccessEdit(produto))
+  //   .catch(err => console.error(err));
+  // }
 
-  handleSuccessSave(response: DocumentReference, produto: Produto) {
-    this.activeModal.dismiss({produto: produto, id: response.id, CreateMode: true})
+  // handleSuccessSave(response: DocumentReference, produto: Produto) {
+  //   this.activeModal.dismiss({produto: produto, id: response.id, CreateMode: true})
     
-  }
+  // }
 
-  handleSuccessEdit(produto: Produto) {
-    this.activeModal.dismiss({produto: produto, id: produto.id, CreateMode: true})
-  }
+  // handleSuccessEdit(produto: Produto) {
+  //   this.activeModal.dismiss({produto: produto, id: produto.id, CreateMode: true})
+  // }
 
 
 }
